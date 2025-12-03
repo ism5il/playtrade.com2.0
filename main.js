@@ -296,6 +296,7 @@ function submitAuth(){
   }
 }
 
+
 function updateUserUI(){
   const isLogged = localStorage.getItem("playtrade_logged") === "1";
   const box = document.getElementById("userDisplay");
@@ -321,4 +322,102 @@ window.addEventListener('load',()=>{
 function logout(){
   localStorage.removeItem("playtrade_logged");
   updateUserUI();
+}
+/* ---------------- AI CHAT SYSTEM ---------------- */
+
+function toggleAIChat() {
+  const chat = document.getElementById("aiChat");
+  chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
+}
+
+function sendAIMessage() {
+  const input = document.getElementById("aiText");
+  const text = input.value.trim();
+  if (!text) return;
+
+  addAIMessage("You", text);
+  input.value = "";
+
+  setTimeout(() => {
+    aiRespond(text);
+  }, 400);
+}
+
+function addAIMessage(sender, msg) {
+  const box = document.getElementById("aiMessages");
+  const div = document.createElement("div");
+  div.className = "ai-msg";
+
+  div.innerHTML = `<strong>${sender}:</strong> ${msg}`;
+  box.appendChild(div);
+
+  box.scrollTop = box.scrollHeight;
+}
+
+function aiRespond(text) {
+  let reply = "I'm your PlayTrade assistant. I can help with products, safety, orders, login and more.";
+
+  // simple responses
+  if (text.toLowerCase().includes("hello") || text.toLowerCase().includes("hi"))
+    reply = "Hello! How can I help you today?";
+
+  if (text.toLowerCase().includes("order"))
+    reply = "You can check your orders in the checkout section. Escrow protects your payments.";
+
+  if (text.toLowerCase().includes("safe"))
+    reply = "Every purchase on PlayTrade is protected with escrow. Funds freeze until you confirm delivery.";
+
+  addAIMessage("AI", reply);
+}
+function toggleAIChat() {
+  const box = document.getElementById("aiChat");
+  box.style.display = box.style.display === "flex" ? "none" : "flex";
+}
+
+function sendAIMessage() {
+  const input = document.getElementById("aiText");
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  addAIMessage(msg, true);
+  input.value = "";
+
+  setTimeout(() => aiRespond(msg), 300);
+}
+
+function addAIMessage(text, isUser = false) {
+  const wrap = document.getElementById("aiMessages");
+  const div = document.createElement("div");
+
+  div.className = "ai-msg" + (isUser ? " user" : "");
+  div.textContent = text;
+
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+function aiRespond(q) {
+  let r = "I'm your digital assistant. Ask me about products, escrow, delivery or account.";
+
+  const txt = q.toLowerCase();
+
+  if (txt.includes("escrow") || txt.includes("safe"))
+    r = "Escrow freezes payment until *you* confirm delivery. 100% buyer safety.";
+
+  if (txt.includes("order"))
+    r = "You can check your order in the checkout window. Payments are protected.";
+
+  if (txt.includes("gta"))
+    r = "GTA Online currency starts from €4.99. Fast delivery, escrow protection.";
+
+  if (txt.includes("hello") || txt.includes("hi"))
+    r = "Hello! How can I help you today?";
+
+  if (txt.includes("cs") || txt.includes("cs2"))
+    r = "CS2 skins pack available for €7.50. Premium selected skins with fast delivery.";
+
+   if (txt.includes("xbox") || txt.includes("Xbox"))
+    r = "Xbox Game Pass subscription for €8.99. Instant code, digital subscription.";
+
+  addAIMessage(r, false);
 }

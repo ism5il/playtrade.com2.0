@@ -148,3 +148,155 @@ footer{text-align:center;padding:1rem;background:var(--card);margin-top:1.2rem}
   background:var(--card);
   border-radius:6px;
 }
+.ai-chat {
+  display: none;
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 280px;
+  height: 360px;
+  background: var(--card);
+  border-radius: 10px;
+  padding: 10px;
+  flex-direction: column;
+  z-index: 99999;
+}
+
+.ai-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 99999;
+}
+/* --- AI Chat Button --- */
+.ai-button {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s;
+  z-index: 9999;
+}
+
+.ai-button:hover {
+  transform: scale(1.07);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+}
+
+/* --- AI Chat Window --- */
+.ai-chat {
+  position: fixed;
+  right: 22px;
+  bottom: 100px;
+  width: 330px;
+  height: 450px;
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  animation: fadeIn .25s ease;
+  z-index: 9999;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+/* Header */
+.ai-header {
+  background: var(--accent);
+  color: #fff;
+  padding: 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: .3px;
+}
+
+/* Messages area */
+.ai-messages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  background: var(--bg);
+}
+
+/* Bubbles */
+.ai-msg {
+  max-width: 80%;
+  padding: 9px 12px;
+  background: var(--card);
+  margin-bottom: 8px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-size: .92rem;
+  line-height: 1.35rem;
+  color: var(--text);
+  animation: msgPop .2s ease;
+}
+
+@keyframes msgPop {
+  from {transform: scale(.95); opacity: .3;}
+  to {transform: scale(1); opacity: 1;}
+}
+
+/* User bubble */
+.ai-msg.user {
+  background: var(--accent);
+  color: #fff;
+  margin-left: auto;
+}
+
+/* Input area */
+.ai-input {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  background: var(--card);
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.ai-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: var(--bg);
+}
+
+.ai-input button {
+  background: var(--accent);
+  border: 0;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.ai-input button:hover {
+  opacity: .85;
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PlayTrade</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-theme="light">
+
+  <header>
+    <div class="brand">PlayTrade</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#catalog">Catalog</a>
+      <a href="#safety">Safety</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="controls">
+      <button class="theme-toggle" onclick="toggleTheme()">Theme</button>
+      <button class="cart-btn" onclick="openCart()">
+        <div id="userDisplay" class="user-display" onclick="openAuthModal()" style="cursor:pointer; display:none;"></div>
+      <button id="logoutBtn" class="logout-btn" onclick="logout()" style="display:none;">Log Out</button>
+
+        <span class="cart-icon">🛒</span>
+        <span id="cartCount" class="cart-count">0</span>
+      </button>
+    </div>
+
+    <!-- LOGIN / REGISTER -->
+    <div class="auth">
+      <button onclick="openAuthModal()">Login</button>
+      <span id="userDisplay" style="display:none; margin-left:10px; font-weight:700; color:var(--accent);"></span>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Digital Goods Marketplace</h1>
+        <p>Fast, safe and smart — buy game keys, currency and skins with escrow protection and AI support.</p>
+        <a href="#catalog" class="cta">Browse Catalog</a>
+      </div>
+      <div class="hero-visual"></div>
+    </section>
+
+    <div class="search-row">
+      <input id="searchInput" oninput="filterCards()" placeholder="Search products, e.g. GTA, CS2..." />
+      <select id="filterSelect" onchange="filterCards()">
+        <option value="all">All</option>
+        <option value="keys">Game Keys</option>
+        <option value="skins">Skins</option>
+        <option value="currency">Currency</option>
+        <option value="subscriptions">Subscriptions</option>
+      </select>
+    </div>
+
+    <!-- CATALOG -->
+    <section id="catalog" class="catalog">
+
+      <!-- Product cards (unchanged) -->
+      <div class="card" onclick="openProduct(this)"
+           data-id="p1"
+           data-category="currency"
+           data-title="GTA V — Online Money"
+           data-img="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"
+           data-desc="Instant delivery. Verified seller. Safe escrow."
+           data-price="4.99">
+        <div class="card-media"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"></div>
+        <div class="card-body">
+          <h3>GTA V — Online Money</h3>
+          <p>Fast delivery • Verified seller</p>
+          <div class="card-footer">
+            <div class="price">€4.99</div>
+            <button class="small" onclick="event.stopPropagation(); addToCartFromBtn('p1')">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="openProduct(this)"
+           data-id="p2"
+           data-category="skins"
+           data-title="CS2 Skins Pack"
+           data-img="https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+           data-desc="Premium curated skins collection."
+           data-price="7.50">
+        <div class="card-media"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"></div>
+        <div class="card-body">
+          <h3>CS2 Skins Pack</h3>
+          <p>Premium selected skins</p>
+          <div class="card-footer">
+            <div class="price">€7.50</div>
+            <button class="small" onclick="event.stopPropagation(); addToCartFromBtn('p2')">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="openProduct(this)"
+           data-id="p3"
+           data-category="keys"
+           data-title="Minecraft Java Key"
+           data-img="https://cdn.cloudflare.steamstatic.com/steam/apps/1672970/header.jpg"
+           data-desc="Global region-free activation key."
+           data-price="19.99">
+        <div class="card-media"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1672970/header.jpg"></div>
+        <div class="card-body">
+          <h3>Minecraft Java Key</h3>
+          <p>Official activation code</p>
+          <div class="card-footer">
+            <div class="price">€19.99</div>
+            <button class="small" onclick="event.stopPropagation(); addToCartFromBtn('p3')">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="openProduct(this)"
+           data-id="p4"
+           data-category="subscriptions"
+           data-title="Xbox Game Pass — 1 Month"
+           data-img="https://cdn.cloudflare.steamstatic.com/steam/apps/2081950/header.jpg"
+           data-desc="One month subscription, instant code."
+           data-price="8.99">
+        <div class="card-media"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2081950/header.jpg"></div>
+        <div class="card-body">
+          <h3>Xbox Game Pass — 1 Month</h3>
+          <p>Digital subscription</p>
+          <div class="card-footer">
+            <div class="price">€8.99</div>
+            <button class="small" onclick="event.stopPropagation(); addToCartFromBtn('p4')">Add</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="safety" class="safety">
+      <h2>How PlayTrade Keeps You Safe</h2>
+      <p>Every purchase is secured with escrow. Funds are frozen on payment and released only after you confirm delivery.</p>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <p>Email: <strong>ismxil@mail.lv</strong></p>
+    </section>
+  </main>
+
+  <footer>PlayTrade © 2025</footer>
+
+  <!-- PRODUCT MODAL -->
+  <div id="productModal" class="modal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <div class="modal-grid">
+        <img id="modalImg">
+        <div>
+          <h2 id="modalTitle"></h2>
+          <p id="modalDesc"></p>
+          <div id="modalPrice" class="modal-price"></div>
+          <div class="modal-actions">
+            <button onclick="addToCartModal()">Add to Cart</button>
+            <button class="outline" onclick="buyNow()">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CART MODAL -->
+  <div id="cartModal" class="modal cart-modal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeCart()">×</button>
+      <h2>Your Cart</h2>
+      <div id="cartList" class="cart-list"></div>
+      <div class="cart-summary">
+        <div>Total: <strong id="cartTotal">€0.00</strong></div>
+        <div class="cart-actions">
+          <button onclick="continueToCheckout()">Checkout</button>
+          <button class="outline" onclick="clearCart()">Clear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div id="checkoutModal" class="modal checkout-modal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeCheckout()">×</button>
+      <h2>Checkout</h2>
+      <div id="checkoutItems" class="checkout-items"></div>
+      <div class="checkout-total">Amount to pay: <strong id="checkoutTotal">€0.00</strong></div>
+      <button onclick="simulatePayment()">Pay & Freeze Funds (Escrow)</button>
+      <div id="paymentNotice" class="payment-notice"></div>
+    </div>
+  </div>
+
+  <!-- LOGIN / REGISTER MODAL -->
+  <div id="authModal" class="modal auth-modal">
+    <div class="modal-card" style="max-width:420px;">
+      <button class="modal-close" onclick="closeAuthModal()">×</button>
+      <h2 id="authTitle">Login</h2>
+
+      <div class="auth-fields">
+        <input id="authEmail" type="email" placeholder="Email">
+        <input id="authPassword" type="password" placeholder="Password">
+      </div>
+
+      <div class="auth-actions">
+        <button onclick="submitAuth()">Continue</button>
+        <button class="outline" onclick="switchAuthMode()">Switch to Register</button>
+      </div>
+
+      <div id="authMsg" class="auth-msg"></div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

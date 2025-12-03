@@ -36,6 +36,9 @@ Gift Cards & Subscriptions
 
 More digital goods coming soon
 
+# Preview
+
+https://ism5il.github.io/playtrade.com2.0/#catalog
 🛡 Safe. Transparent. User-First.
 
 PlayTrade is built around one promise — you never lose your money.

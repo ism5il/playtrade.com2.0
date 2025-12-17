@@ -53,6 +53,5 @@ Simple, clear, and secure.
 ✨ PlayTrade — Trade Digital. Trade Smart.
 
 
-
-
-https://powerpoint.cloud.microsoft/open/onedrive/?docId=56DA010B904D588E%21s92ef2bf43faf47508acf077240748879&driveId=56DA010B904D588E
+PRESENTATION
+https://drive.google.com/file/d/1-J5E6uu1r_YsdjsJ7aMVuf3uPSXnV0ue/view?usp=drive_link
